@@ -1,6 +1,6 @@
 ---
 title: "Creating an iOS App for Voicey"
-slug: creating-an-ios-app-for-voicey
+slug: creating-a-new-ios-app
 ---
 
 # Creating an iOS App for Voicey

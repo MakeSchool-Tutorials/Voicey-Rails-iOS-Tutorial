@@ -1,6 +1,6 @@
 ---
 title: "Creating a Rails Application"
-slug: creating-a-rails-application
+slug: creating-a-rails-app
 ---
 
 In this section we are going to setup a new rails app, examine the rails app architecture and install some dependencies.

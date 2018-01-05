@@ -1,6 +1,6 @@
 ---
 title: "Introduction to Ruby and Rails"
-slug: introduction-to-ruby-on-rails
+slug: introduction-to-rails
 ---
 
 Before we get started building our voice memo app, we will need to setup _Ruby_ - the language we will be writing our app in.

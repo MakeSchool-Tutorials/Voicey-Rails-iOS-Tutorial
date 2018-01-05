@@ -1,6 +1,6 @@
 ---
 title: "Creating Users"
-slug: creating-users
+slug: creating-the-user-model
 ---
 
 Voicey needs to have users to store Memos. We need to scaffold a basic _User_ model with a name and an email.

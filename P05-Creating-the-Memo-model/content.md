@@ -1,6 +1,6 @@
 ---
 title: "Creating Memos"
-slug: creating-memos
+slug: creating-the-memo-model
 ---
 
 Lets create the _Memo_ model with the following specifications:
