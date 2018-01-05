@@ -8,6 +8,3 @@ Each tutorial should have a `README.md` at the root with the following things in
 1. Objectives for the tutorial
 1. Instructor FAQ (common areas students make get stuck on, bugs they may encounter, etc)
 
-# Writing your own tutorial
-
-Use this repository as a starting point for your tutorial. Each tutorial must follow it's file structure and include all files included in this repository.
