@@ -143,11 +143,46 @@ The three (3) tests should pass now.
 
 ## Association Validation
 
-Lets now test that a _User_ has many _Memos_.
+Lets test that a _User_ has many _Memos_. Add the following test to our user_spec.rb
 
 ```ruby
 describe "Associations" do
-  it { should have_many(:memos) }
+  it "should have many memos" do
+    user = User.new(name: "Eliel", email: "eliel@test.com", password: "test")
+    expect(user).to have_many(:memos)
+  end
+end
+```
+
+The final user_spec.rb file should look like this now:
+
+```ruby
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  describe "Validations" do
+    it "is valid with valid attributes" do
+      user = User.new(name: "Eliel", email: "eliel@test.com")
+      expect(user).to be_valid
+    end
+
+    it "is invalid without a name" do
+      bad_user = User.new(name: nil, email: "test@mail.com")
+      expect(bad_user).to_not be_valid
+    end
+
+    it "is invalid without an email" do
+      bad_user = User.new(name: "Eliel", email: nil)
+      expect(bad_user).to_not be_valid
+    end
+  end
+
+  describe "Associations" do
+    it "should have many memos" do
+      user = User.new(name: "Eliel", email: "eliel@test.com", password: "test")
+      expect(user).to have_many(:memos)
+    end
+  end
 end
 ```
 
@@ -225,7 +260,15 @@ RSpec.describe Memo, type: :model do
     end
   end
   describe "Associations" do
-    it { should belong_to(:user) }
+    it "should have many memos" do
+      memo = Memo.new(
+        title: "My Memo",
+        time: DateTime.now.utc,
+        text_body: "This is the text body",
+        user: subject
+      )
+      expect(memo).to belong_to(:user)
+    end
   end
 end
 ```

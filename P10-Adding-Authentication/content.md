@@ -294,7 +294,7 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
     it "is invalid without a name" do
-      bad_user = User.new(name: nil, email: "test@mail.com", password: "test"))
+      bad_user = User.new(name: nil, email: "test@mail.com", password: "test")
       expect(bad_user).to_not be_valid
     end
     it "is invalid without an email" do
@@ -307,8 +307,11 @@ RSpec.describe User, type: :model do
     end
   end
   describe "Associations" do
-    it { should have_many(:memos) }
-  end
+      it "should have many memos" do
+        user = User.new(name: "Eliel", email: "eliel@test.com", password: "test")
+        expect(user).to have_many(:memos)
+      end
+    end
 end
 ```
 >
@@ -383,7 +386,7 @@ end
 What is happening here?
 
 > [info]
-> We are testing for certain behaviors of our Rails app when it is authenticated and when it isn't. We test the senario when there is no authentication - it should fail and when we do have valid authentication - we should get a successful (200...299) response.
+> We are testing for certain behaviors of our Rails app when it is authenticated and when it isn't. We test the scenario when there is no authentication - it should fail and when we do have valid authentication - we should get a successful (200...299) response.
 >
 
 # Refactoring our authentication code
