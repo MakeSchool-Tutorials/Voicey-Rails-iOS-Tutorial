@@ -1,4 +1,4 @@
 ---
 title: "Sending Audio to Voicey Server"
-slug: ios-sending-audio-to-voicey-server
+slug: sending-audio-to-voicey-server
 ---

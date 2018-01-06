@@ -1,6 +1,6 @@
 ---
 title: "Deploying to Heroku"
-slug: deploying-to-heroku
+slug: deploying-our-app-to-heroku
 ---
 
 Next up is deploying voicey to Heroku.
