@@ -1,6 +1,6 @@
 ---
 title: "Adding Audio Attachments to Memos"
-slug: adding-audio-attachments-to-memos
+slug: adding-audio-attachments-to-the-memo-model
 ---
 
 Voicey allows users to add voice memos. So far, we have created and tested our User and Memo resource.
