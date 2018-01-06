@@ -13,9 +13,8 @@ Before we can upload voice memos, we will need a place to store our audio files.
 
 Lets setup an Amazon s3 by signing up for Amazon here:
 
-[Amazon s3 Homepage](https://aws.amazon.com/s3/)
-
 1. Sign up for a new account if you don't have one.
+[Amazon s3 Homepage](https://aws.amazon.com/s3/)
 
 1. Go to the Security Credentials page
 ![Security Credentials](assets/security-aws.png)
@@ -29,12 +28,15 @@ Lets setup an Amazon s3 by signing up for Amazon here:
 Amazon s3 stores our files in _"buckets"_. Buckets contain related files. An example could be a bucket called voicey-development that will store all the files related to our Rails app.
 
 1. Go to the Amazon s3 Homepage. I have created a few buckets, your bucket list should be empty.
+
 ![s3 Homepage](assets/s3-home.png)
 
 1. Create a new bucket, give it a name and choose Oregon for the region
+
 ![s3 Bucket First](assets/s3-bucket-oregon.png)
 
-1. In the next section (Set properties) under manage permissions, set the permissions to "Grant public read access to this bucket"
+1. In the next section (Set properties) under manage permissions, set the permissions to "Grant public read access to this bucket".
+
 ![s3 Bucket Read Access](assets/s3-bucket-read.png)
 
 1. Hit next on the next steps then create your bucket.
@@ -167,7 +169,7 @@ source .env
 Then add the following code to your _Memo_ model.
 
 ```ruby
-has_attached_file :voice_file
+has_attached_file :voice_file, default_url: "/voice_memos/empty/empty.mp3"
 validates_attachment :voice_file, :content_type =>['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio']
 ```
 
@@ -192,7 +194,7 @@ Replace the folling line in the _memo_params_ function in the _memo_ _ _controll
 params.permit(:voice_file, :title, :text_body, :date)
 ```
 
-Your memo controller should know look like this:
+Your memo controller should now look like this:
 
 ```ruby
 class MemosController < ApplicationController
@@ -250,31 +252,31 @@ end
 
 # Serializing our JSON responses
 
-Because we need to render the URL for our memo files, we will need to create a custom JSON serializer for our _Memo_ model.
+Because we need to render the audio URL for our memos, we will need to create a custom JSON serializer for our _Memo_ model.
 
 Serializers enable us to specify which properties we want to render.
 
 1. Add the ActiveModel serializer Gem to our Gemfile and run bundle install.
 
-```ruby
-gem 'active_model_serializers'
-```
+  ```ruby
+  gem 'active_model_serializers'
+  ```
 
 1. Run:
 
-```shell
-rails g serializer memo
-```
+  ```shell
+  rails g serializer memo
+  ```
 
 1. Add the following code to the memo_serializer.rb file under the class definition:
 
-```ruby
-attributes :id, :title, :text_body, :date, :voice_file_url
+  ```ruby
+  attributes :id, :title, :text_body, :date, :voice_file_url
 
-def voice_file_url
-  object.voice_file.url()
-end
-```
+  def voice_file_url
+    object.voice_file.url()
+  end
+  ```
 
 Our memo_serializer.rb file should look like this now:
 
