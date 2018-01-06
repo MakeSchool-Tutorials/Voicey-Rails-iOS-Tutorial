@@ -145,7 +145,7 @@ We have just completed creating our _User_ model.
 
 Lets modify it to make the email field unique, that way we cannot insert a _User_ in to the database if there exists a _User_ with the same email.
 
-## Adding unique field to User
+## Adding a unique field to User
 
 Run this in your terminal:
 

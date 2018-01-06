@@ -7,4 +7,3 @@ Each tutorial should have a `README.md` at the root with the following things in
 1. Pre-requisites to understand the tutorial
 1. Objectives for the tutorial
 1. Instructor FAQ (common areas students make get stuck on, bugs they may encounter, etc)
-

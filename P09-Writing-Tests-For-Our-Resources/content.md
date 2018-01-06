@@ -124,7 +124,8 @@ The _User_ model should now look like this:
 ```ruby
 class User < ApplicationRecord
   has_many :memos
-  validates_presence_of :name, :email
+  validates :name, :password, presence: true
+  validates :email, presence: true, uniqueness: true
 end
 ```
 
@@ -237,7 +238,7 @@ Memo model validation solution:
 ```ruby
 class Memo < ApplicationRecord
   belongs_to :user
-  validates_presence_of :title, :date, :text_body
+  validates :title, :date, :text_body, presence: true
 end
 ```
 >

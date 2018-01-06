@@ -5,7 +5,7 @@ slug: the-memo-controller
 
 In the previous section, we created the controller and added the route for users.
 
-We are going to create a controller and a route for Memos
+We are going to create a controller and a route for Memos.
 
 # Creating the Memo controller
 
