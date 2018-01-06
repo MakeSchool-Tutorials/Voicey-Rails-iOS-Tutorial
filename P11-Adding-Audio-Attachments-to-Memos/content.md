@@ -1,5 +1,5 @@
 ---
-title: "Adding Audo Attachments to Memos"
+title: "Adding Audio Attachments to Memos"
 slug: adding-audio-attachments-to-memos
 ---
 
