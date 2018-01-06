@@ -109,14 +109,10 @@ class User < ApplicationRecord
     self.token = token_gen
     token_gen
   end
-
-  def clear_token
-    self.update_columns(token: nil)
-  end
 end
 ```
 
-Lets modify our _application.rb_ file to set a current user variable.
+Lets modify our _application.rb_ file to set a current user variable and require authentication to use our Rails app.
 
 ```ruby
 # 1. Import HttpAuthentication library from ActionController
@@ -194,9 +190,9 @@ end
 > In the application controller, we have required that all requests will require authentication by token unless we explicitly opt out of doing so through the before action called require_login.
 >
 
-Next up is modifying our _users_controller.rb_ file to handle user creation.
+Next up is modifying our users_controller.rb file to handle user creation.
 
-1. Change the _user_params_ function in _users_controller.rb_ to this:
+1. Change the user_params function in users_controller.rb to this:
 
 ```ruby
 def user_params
@@ -210,7 +206,65 @@ end
 skip_before_action :require_login, only: [:create], raise: false
 ```
 
-This will tell Rails not to run the require_login function when creating a user. Because a user doesn't have to be logged in to create an account.ebe
+This will tell Rails not to run the require_login function when creating a user. Because a user doesn't have to be logged in to create an account.
+
+Our users_controller.rb file should know look like this:
+
+```ruby
+class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :update, :destroy]
+  skip_before_action :require_login, only: [:create], raise: false
+
+  # GET /users
+  def index
+    @users = User.all
+
+    render json: @users
+  end
+
+  # GET /users/1
+  def show
+    render json: @user
+  end
+
+  # POST /users
+  def create
+    @user = User.new(user_params)
+
+    if @user.save
+      render json: @user, status: :created, location: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /users/1
+  def update
+    if @user.update(user_params)
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /users/1
+  def destroy
+    @user.destroy
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def user_params
+      params.permit(:name, :email, :password)
+    end
+end
+
+```
 
 # Testing our authentication code
 
@@ -227,7 +281,7 @@ Go to the spec/model/user_spec.rb and change the following:
 > Can you modify the tests to account for the password field we added to users?
 >
 
-Solution: Our  user_spec.rb file should look like this now.
+Solution: Our user_spec.rb file should look like this now.
 
 > [solution]
 >
@@ -261,7 +315,9 @@ end
 
 ## Adding tests for the users controller
 
-Your _users_controller.rb_ files should look like this now:
+Lets add a few functions to test our users_controllers.rb file.
+
+Our user_spec.rb file should look like this now:
 
 ```ruby
 require 'rails_helper'
@@ -323,5 +379,11 @@ RSpec.describe "UserControllers", type: :request do
   end
 end
 ```
+
+What is happening here?
+
+> [info]
+> We are testing for certain behaviors of our Rails app when it is authenticated and when it isn't. We test the senario when there is no authentication - it should fail and when we do have valid authentication - we should get a successful (200...299) response.
+>
 
 # Refactoring our authentication code
