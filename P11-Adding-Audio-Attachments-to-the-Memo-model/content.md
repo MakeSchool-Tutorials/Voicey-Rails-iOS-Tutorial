@@ -9,7 +9,7 @@ In this section, we are going to add an audio attachment to _Memos_ to enable us
 
 # Setting up an Amazon s3 account
 
-Before we can upload voice memos, we will need a place to store our audio files. We cannot store the files on the computer that houses our Rails applicaition because is not designed to store lots of large files. Typically, developers will store large files in a content delivery network like Amazon s3 or Google cloud storage then store the url to the resource in a database.
+Before we can upload voice memos, we will need a place to store our audio files. We cannot store the files on the computer that houses our Rails application because is not designed to store lots of large files. Typically, developers will store large files in a content delivery network like Amazon s3 or Google cloud storage then store the url to the resource in a database.
 
 Lets setup an Amazon s3 by signing up for Amazon here:
 
@@ -88,6 +88,9 @@ Add this configuration file to the _application.rb_ file in _config_ folder.
 ```ruby
 config.paperclip_defaults = {
   storage: :s3,
+  s3_protocol: :https,
+  url: ':s3_domain_url',
+  path: '/:class/:attachment/:id_partition/:filename',
   s3_credentials: {
     bucket: ENV.fetch('S3_BUCKET_NAME'),
     access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
@@ -121,6 +124,9 @@ module VoiceyApi
 
     config.paperclip_defaults = {
       storage: :s3,
+      s3_protocol: :https,
+      url: ':s3_domain_url',
+      path: '/:class/:attachment/:id_partition/:filename',
       s3_credentials: {
         bucket: ENV.fetch('S3_BUCKET_NAME'),
         access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
@@ -169,7 +175,7 @@ source .env
 Then add the following code to your _Memo_ model.
 
 ```ruby
-has_attached_file :voice_file, default_url: "/voice_memos/empty/empty.mp3"
+has_attached_file :voice_file
 validates_attachment :voice_file, :content_type =>['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio']
 ```
 
@@ -178,8 +184,8 @@ Your _Memo_ model should now contain the following:
 ```ruby
 class Memo < ApplicationRecord
   belongs_to :user
-  validates_presence_of :title, :date, :text_body, :user
-  has_attached_file :voice_file, default_url: "/voice_memos/empty/empty.mp3"
+  validates :title, :date, :text_body, :user, presence: true
+  has_attached_file :voice_file
   validates_attachment :voice_file, content_type: { content_type: ['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio']}
 end
 ```
@@ -188,7 +194,7 @@ end
 
 We need to update the memo controller to account for adding the _voice_file_ attachment to _Memos_.
 
-Replace the folling line in the _memo_params_ function in the _memo_ _ _controller.rb_ file.
+Replace the following line in the _memo_params_ function in the memo_controller.rb file.
 
 ```ruby
 params.permit(:voice_file, :title, :text_body, :date)
@@ -215,6 +221,8 @@ class MemosController < ApplicationController
   # POST /memos
   def create
     @memo = Memo.new(memo_params)
+    # Add the current logged in user as the creator of the memo
+    @memo.user = current_user
 
     if @memo.save
       render json: @memo, status: :created, location: @memo
@@ -297,5 +305,17 @@ end
 Great! Now our app handles audio attachments to the _Memo_ model.
 
 # Testing the audio attachments
+
+## Testing with an HTTP client (Postman or PAW)
+
+### Postman
+
+Lets test the memo creation and file upload with postman.
+
+Create a POST request to the memo route and fill in the body of the request.
+
+![Postman file upload](assets/postman-file-upload.png)
+
+## Writing integration tests for the audio attachments.
 
 Lets test the audio upload functionality by writing some model and controller tests for _Memo_.

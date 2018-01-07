@@ -10,15 +10,15 @@ We will need the following models:
 - Memo
   - title
   - time
-  - voice_attachement
+  - voice_file
   - text_body
-  - belongs to a user
+  - belongs to a user (Relationship)
 
 - User
   - name
   - email
   - password
-  - has many memos
+  - has many memos (Relationship)
 
 ## The Entity Relation Diagram
 

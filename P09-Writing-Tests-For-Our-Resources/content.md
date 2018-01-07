@@ -5,7 +5,7 @@ slug: writing-tests-for-our-resources
 
 We have written a lot of code in the previous sections of this tutorial. We are going to test what we have written so far.
 
-Lets start with the model tests
+Lets start with the model tests.
 
 # Testing the Models
 
@@ -18,9 +18,6 @@ Lets add the following Gems to our Gemfile:
 
 group :test do
   gem 'rspec-rails', '~> 3.7', '>= 3.7.2'
-  gem 'factory_girl_rails', '~> 4.9'
-  gem 'shoulda-matchers', '~> 3.1', '>= 3.1.2'
-  gem 'faker', '~> 1.8', '>= 1.8.7'
   gem 'database_cleaner', '~> 1.6', '>= 1.6.2'
 end
 ```
@@ -54,23 +51,13 @@ You should see something similar to this output in your terminal:
 
 ![rspec Test](assets/spec-test.png)
 
-Lets setup Shoulda Matches to aid with our testing. Add the following to your _spec/rails_helper.rb_ file under the _require 'rspec/rails'_:
-
-```ruby
-Shoulda::Matchers.configure do |config|
-  config.integrate do |with|
-    with.test_framework :rspec
-    with.library :rails
-  end
-end
-```
 
 > [action]
->Go to [http://0.0.0.0:30000](http://0.0.0.0:30000) in your browser and test any of the routes.
+>Go to [http://localhost:30000](http://0.0.0.0:30000) in your browser and test any of the routes.
 
 ## Writing the tests
 
-Lets write the test for the _User_ model.
+Lets write the tests for the _User_ model.
 
 ```ruby
 rails generate rspec:model User
@@ -116,7 +103,8 @@ Lets add some validations to make sure that a _User_ must have a name and email 
 Add the following to the _User_ model, right under the belongs_to:
 
 ```ruby
-validates_presence_of :name, :email
+validates :name, presence: true
+validates :email, presence: true, uniqueness: true
 ```
 
 The _User_ model should now look like this:
@@ -124,12 +112,12 @@ The _User_ model should now look like this:
 ```ruby
 class User < ApplicationRecord
   has_many :memos
-  validates :name, :password, presence: true
+  validates :name, presence: true
   validates :email, presence: true, uniqueness: true
 end
 ```
 
-The _validates_presence_of_ tells _ActiveRecord_ to ensure that the name and email field exists before saving the _User_ model.
+The _validates_ modifier tells _ActiveRecord_ to ensure that the name and email field exists before saving the _User_ model.
 
 Lets test it out.
 
@@ -148,8 +136,8 @@ Lets test that a _User_ has many _Memos_. Add the following test to our user_spe
 ```ruby
 describe "Associations" do
   it "should have many memos" do
-    user = User.new(name: "Eliel", email: "eliel@test.com", password: "test")
-    expect(user).to have_many(:memos)
+    assoc = User.reflect_on_association(:memos)
+    expect(assoc.macro).to eq :has_many
   end
 end
 ```
@@ -179,8 +167,8 @@ RSpec.describe User, type: :model do
 
   describe "Associations" do
     it "should have many memos" do
-      user = User.new(name: "Eliel", email: "eliel@test.com", password: "test")
-      expect(user).to have_many(:memos)
+      assoc = User.reflect_on_association(:memos)
+      expect(assoc.macro).to eq :has_many
     end
   end
 end
@@ -193,15 +181,21 @@ end
 > You will have to test for the required Memo attributes as well as the belongs_to association to User.
 >
 
-Hint:
+Hint
 
 > [info]
-> In the associations describe block, you will have to match against belongs_to, so it will be: it {should belong_to(user)}
->  
+> To create a Memo, you will need to have an existing user. You could create a user once that you could use for all your tests by creating a user in a before block like this:
+>
+```ruby
+before {
+  User.new(name: "Eliel", email: "eliel@test.com")
+}
+```
+>
 
 <!--  -->
 
-Rspec Test Solution
+Rspec Memo Test Solution
 
 > [solution]
 >
@@ -261,13 +255,8 @@ RSpec.describe Memo, type: :model do
   end
   describe "Associations" do
     it "should have many memos" do
-      memo = Memo.new(
-        title: "My Memo",
-        time: DateTime.now.utc,
-        text_body: "This is the text body",
-        user: subject
-      )
-      expect(memo).to belong_to(:user)
+      assoc = Memo.reflect_on_association(:user)
+      expect(assoc.macro).to eq :belongs_to
     end
   end
 end

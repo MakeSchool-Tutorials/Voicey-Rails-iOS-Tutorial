@@ -190,6 +190,12 @@ end
 > In the application controller, we have required that all requests will require authentication by token unless we explicitly opt out of doing so through the before action called require_login.
 >
 
+The current_user function
+
+> [info]
+> The current_user function in the application.rb is going to be very useful for us. In authorized requests, we can find out who the logged in user is from this method.
+>
+
 Next up is modifying our users_controller.rb file to handle user creation.
 
 1. Change the user_params function in users_controller.rb to this:
@@ -266,6 +272,73 @@ end
 
 ```
 
+Lets also modify our memo_controller.rb file to account for the authentication.
+
+Add this line to your memo_controller.rb file in the create function after you initialize a memo
+
+```ruby
+# Add the current logged in user as the creator of the memo
+@memo.user = current_user
+```
+
+Our memo_controller.rb file should look like this now:
+
+```ruby
+class MemosController < ApplicationController
+  before_action :set_memo, only: [:show, :update, :destroy]
+
+  # GET /memos
+  def index
+    @memos = Memo.all
+
+    render json: @memos
+  end
+
+  # GET /memos/1
+  def show
+    render json: @memo
+  end
+
+  # POST /memos
+  def create
+    @memo = Memo.new(memo_params)
+    # Add the current logged in user as the creator of the memo
+    @memo.user = current_user
+
+    if @memo.save
+      render json: @memo, status: :created, location: @memo
+    else
+      render json: @memo.errors, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /memos/1
+  def update
+    if @memo.update(memo_params)
+      render json: @memo
+    else
+      render json: @memo.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /memos/1
+  def destroy
+    @memo.destroy
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_memo
+      @memo = Memo.find(params[:id])
+    end
+
+    # Only allow a trusted parameter "white list" through.
+    def memo_params
+      params.permit(:voice_file, :title, :text_body, :time)
+    end
+end
+```
+
 # Testing our authentication code
 
 ## Adding tests for the password field
@@ -307,11 +380,11 @@ RSpec.describe User, type: :model do
     end
   end
   describe "Associations" do
-      it "should have many memos" do
-        user = User.new(name: "Eliel", email: "eliel@test.com", password: "test")
-        expect(user).to have_many(:memos)
-      end
+    it "should have many memos" do
+      assoc = User.reflect_on_association(:memos)
+      expect(assoc.macro).to eq :has_many
     end
+  end
 end
 ```
 >

@@ -47,7 +47,17 @@ Lets go over some of the important files and folders in your rails application.
 
 ## The App Folder
 
-![Rails App Folder](assets/rails-app.png)
+<!-- ![Rails App Folder](assets/rails-app.png) -->
+
+```
+.
+├── channels
+├── controllers
+├── jobs
+├── mailers
+├── models
+└── views
+```
 
 The app folder contains the following folders:
 
@@ -63,13 +73,40 @@ The app folder contains the following folders:
 
 ## The Config Folder
 
-![Rails Config](assets/rails-config.png)
+<!-- ![Rails Config](assets/rails-config.png) -->
+
+```
+├── environments
+│   ├── development.rb
+│   ├── production.rb
+│   └── test.rb
+├── initializers
+│   ├── application_controller_renderer.rb
+│   ├── backtrace_silencers.rb
+│   ├── cors.rb
+│   ├── filter_parameter_logging.rb
+│   ├── inflections.rb
+│   ├── mime_types.rb
+│   └── wrap_parameters.rb
+├── locales
+│   └── en.yml
+├── application.rb
+├── boot.rb
+├── cable.yml
+├── database.yml
+├── environment.rb
+├── puma.rb
+├── routes.rb
+├── secrets.yml
+└── spring.rb
+```
 
 The app folder contains the following:
 
 - Environments - Setup for our enviroments (development, test, production, etc..)
 - database.yml - This is where we will setup our databases
 - routes.rb - This is where we will add our Restful routes to.
+- application.rb - Contains setting for our rails application.
 
 # Model, View, Controller in Rails
 
@@ -151,7 +188,7 @@ test:
   password: postgres
 
 
-test:
+production:
   adapter: postgresql
   encoding: unicode
   database: voicey_production

@@ -57,13 +57,18 @@ There are many types of associations in Rails:
 
 We are going to be using the _belongs_to_ and the _has_many_ in this tutorial.
 
+> [info]
+> When creating relationships think about who needs to hold the foreign_key to a table.
+In this tutorial every Memo will need to reference an existing user in our database and hence holds a foreign_key to the users table.
+>
+
 ### Belongs To
 
-A belongs_to association sets up a one-to-one connection with another model. When we use a _belongs_to_ association, we indicate that we (the model) contains the _foreign_key_ of another model.
+A belongs_to association sets up a one-to-one connection with another model. When we use a belongs to association, we indicate that we (the model) contains the foreign key to another model.
 
 ### Has Many
 
-A has_many association indicates a one-to-many connection with another model. This doesn't use any _foreign_keys_. It simply lets Rails know that there is another model that holds the a _foreign_key_ to itself.
+A has_many association indicates a one-to-many connection with another model. This doesn't use any foreign keys. It simply lets Rails know that there is another model that holds the a foreign key to itself.
 
 > [info]
 > Keeps these associations in mind as we will be using these them in the next section.
@@ -87,13 +92,13 @@ end
 
 ### Adding Memos to User
 
-Add the following to your _User.rb_ file:
+Add the following to your user.rb file:
 
 ```ruby
 has_many :memos
 ```
 
-Your _User.rb_ file should look like this now:
+Your user.rb file should look like this now:
 
 ```ruby
 class User < ApplicationRecord
@@ -134,3 +139,7 @@ memo.save
 ```
 
 If the relationships were setup properly, you should be able to save both the user and the memo.
+
+# Summary
+
+- To create associations in Rails, we first have to create a migration file to add the association to our database then we need to modify the models with the association keywords (eg. belongs_to, has_one).

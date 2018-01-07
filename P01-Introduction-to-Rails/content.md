@@ -75,8 +75,8 @@ You can search for all Gems on the RubyGems homepage:
 
 [Ruby Gems](https://rubygems.org)
 
-
 # The Rails Framework
+
 ## Background
 
 Rails is a web application development framework written in the Ruby. Rails follows convention over configuration as it makes certain assumptions about what a developer needs to build a web application. This translates to faster development time and a fun development experience.
