@@ -1,8 +1,7 @@
-title: "Voicy API Tutorial"
+title: "Build a voice memo app in Ruby on Rails"
 cover: cover.png
-solution_url: https://github.com/MakeSchool-Tutorials/Tutorial-Template/
 teaser_text: |
     In this tutorial, we will be building
-    an audio Memo application. We will start by
-    building the API in Ruby on Rails and then build
+    an voice memo app. We will start by
+    building the API in Ruby on Rails then build
     the iOS app.
