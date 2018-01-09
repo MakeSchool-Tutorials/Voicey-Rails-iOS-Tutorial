@@ -54,6 +54,6 @@ Lets modify the memo_params function to allow parameters for creating a memo.
 
 ```ruby
 def memo_params
-  params.permit(:voice_file, :title, :text_body, :date)
+  params.permit(:title, :text_body, :date)
 end
 ```

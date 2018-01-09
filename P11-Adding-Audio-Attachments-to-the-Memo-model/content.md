@@ -194,7 +194,7 @@ end
 
 We need to update the memo controller to account for adding the _voice_file_ attachment to _Memos_.
 
-Replace the following line in the _memo_params_ function in the memo_controller.rb file.
+Lets add the voice_file property to our list of sanitized parameters in our memos_controller.rb file:
 
 ```ruby
 params.permit(:voice_file, :title, :text_body, :date)
