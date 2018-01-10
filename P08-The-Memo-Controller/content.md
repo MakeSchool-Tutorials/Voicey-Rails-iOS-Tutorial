@@ -33,7 +33,7 @@ Solution for creating and adding the _Memo_ route:
 Add this to routes.rb
 >
 ```ruby
-resources :users
+resources :memos
 ```
 >
 Your routes.rb file will look like this now:

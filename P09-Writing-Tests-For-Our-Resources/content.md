@@ -39,7 +39,26 @@ rails generate rspec:install
 
 This should create a new folder called _spec_ in the root of our rails application.
 
-![Spec Folder](assets/spec-folder.png)
+```
+.
+├── app
+├── bin
+├── config
+├── db
+├── lib
+├── log
+├── public
+├── spec -- This is new!
+├── tmp
+├── vendor
+├── Gemfile
+├── Gemfile.lock
+├── README.md
+├── Rakefile
+└── config.ru
+```
+
+<!-- ![Spec Folder](assets/spec-folder.png) -->
 
 Then run the rails server to make sure everything is working correctly:
 
@@ -51,9 +70,7 @@ You should see something similar to this output in your terminal:
 
 ![rspec Test](assets/spec-test.png)
 
-
-> [action]
->Go to [http://localhost:30000](http://0.0.0.0:30000) in your browser and test any of the routes.
+This is great, we haven't written any tests yet. Lets write some tests.
 
 ## Writing the tests
 
@@ -277,18 +294,20 @@ end
 
 # Testing the Controllers
 
-Lets begin testing the User controller.
+When testing in Rails with rspec, we generally don't tests Controllers by rather write an integration tests to test that a certain request is successful through a controller.
+
+Lets begin writing a request spec for the User Controller.
 
 ```ruby
 rails generate rspec:request UserController
 ```
 
-Run only the controller tests with:
+Run only the request tests with:
 
 ```ruby
 bundle exec rspec spec/requests
 ```
 
-This should fail.
+The request tests should fail.
 
-Lets modify our _UserControllerTests_ and create some tests.
+We will fill in the controller request tests in the next section when we cover authentication.

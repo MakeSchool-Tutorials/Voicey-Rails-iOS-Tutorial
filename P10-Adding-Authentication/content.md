@@ -7,15 +7,13 @@ We worked on fleshing out the details of a _User_ in the previous section. Lets 
 
 # Adding token based authentication to our app
 
-We are going to handle authentication in our Rails app with tokens. We are going to be adding new field in the _users_ table to store our token.
-
-Tokens are representations of authentication. They are useful because they can't be decrypted to anything useful.
+We are going to handle authentication in our Rails app with tokens. We are going to be adding some new fields to the _users_ table in our database.
 
 ```ruby
 rails generate migration AddPasswordAndTokenToUsers token:string:index password_hash:string, password_salt:string
 ```
 
-This will add a token and password field to the _User_ model and add the token field as an unique index - no two _users_ will have the same token.
+This will add a token, password_hash and password_salt field to the _User_ model and add the token field as an unique index - no two _users_ will have the same token.
 
 # Adding bcrypt to our Rails app
 
@@ -46,6 +44,13 @@ def encrypt_password do
     self.password_salt = BCrypt::Engine.generate_salt
     self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
   end
+end
+
+# Generates a token for a user
+def generate_token
+  token_gen = SecureRandom.hex
+  self.token = token_gen
+  token_gen
 end
 ```
 
@@ -339,6 +344,14 @@ class MemosController < ApplicationController
 end
 ```
 
+> [info]
+>
+Can you tell where the current_user method is coming from?
+>
+We created this method in the application.rb file, which exposes this method globally in each controller.
+This allows us access the current logged in User if there is any. (There will be because all requests require authentication)
+>
+
 # Testing our authentication code
 
 ## Adding tests for the password field
@@ -462,4 +475,4 @@ What is happening here?
 > We are testing for certain behaviors of our Rails app when it is authenticated and when it isn't. We test the scenario when there is no authentication - it should fail and when we do have valid authentication - we should get a successful (200...299) response.
 >
 
-# Refactoring our authentication code
+<!-- # Refactoring our authentication code -->

@@ -130,7 +130,7 @@ In this tutorial, we are using Rails in API only mode, which means we will be re
 
 The _Controller_ is responsible for handling requests. It directs traffic to appropriate functions which coordinates with the _Model_ and the _View_ to render a response.
 
-# Dependencies & Bundler & the Gemfile
+# Dependencies, Bundler & the Gemfile
 
 ## Bundler
 
