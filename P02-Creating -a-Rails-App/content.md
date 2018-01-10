@@ -149,9 +149,15 @@ It enables us to manage the Gems that should be installed for each enviroment(pr
 
 # Provisioning a database
 
-## Installing postgres
+## Installing Postgres on macOS
 
 We will need to setup a _postgres_ database to use with our app. For this tutorial we will be using postgres.
+
+Follow the instructions here for installing postgres:
+
+[Installing Postgres Link](https://gist.github.com/sgnl/609557ebacd3378f3b72)
+
+## Setup Postgres on Rails
 
 Remove the sqlite gem from your Gemfile and add the following:
 
