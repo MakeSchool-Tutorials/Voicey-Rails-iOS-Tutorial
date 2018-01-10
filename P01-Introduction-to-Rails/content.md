@@ -56,11 +56,18 @@ macOS comes with ruby 2.7 installed, but it does not allow us to upgrade the ver
     ```
 
 
-5. Install the latest version of ruby: v2.5.0
+5. Install the latest version of ruby: 2.5.0
 
     ```shell
     rbenv install 2.5.0
     ```
+
+
+6. Set the global ruby version to 2.5.0
+
+  ```shell
+  rbenv global 2.5.0
+  ```
 
 > [info]
 > Running rbenv local 2.5.0 will set your local ruby version to 2.5.0 instead of using the global version and will create a .ruby-version file in your current directory. We will run that command later in the tutorial.
