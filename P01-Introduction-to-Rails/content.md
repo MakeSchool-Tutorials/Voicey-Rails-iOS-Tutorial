@@ -14,7 +14,7 @@ In this section we will need to:
 
 ## Background
 
-Ruby is the language for writing Rails applications. It has been around since 1985 and has developed an enourmous community of developers and enthusiats. Ruby focuses on developer productivity making the language easy and pleasant to write.
+Ruby is the language for writing Rails applications. It has been around since 1985 and has developed an enormous community of developers and enthusiasts. Ruby focuses on developer productivity making the language easy and pleasant to write.
 
 > A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write.
 
