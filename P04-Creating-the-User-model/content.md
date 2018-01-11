@@ -21,12 +21,15 @@ Lets start by creating the _User_ model since we will need a way to associate a 
 rails generate model User name:string email:string
 ```
 
-### Breakdown
+### Breakdown of Model Generator
 
 > [info]
 > ![Rails Generate](assets/rails-generate.png)
 >
-*rails generate model* tells rails we want to generate a model called User. The next parameters are the attributes of the model.
+_rails generate model_ tells rails we want to generate a model called User.
+>
+The next parameters are the attributes of the model.
+>
 eg. rails generate User name:string email:string age:integer
 >
 
