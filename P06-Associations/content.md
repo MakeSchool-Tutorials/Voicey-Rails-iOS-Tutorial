@@ -64,7 +64,7 @@ In this tutorial every Memo will need to reference an existing user in our datab
 
 ### Belongs To
 
-A belongs_to association sets up a one-to-one connection with another model. When we use a belongs to association, we indicate that we (the model) contains the foreign key to another model.
+A belongs_to association sets up a one-to-one connection with another model. When we use a belongs to association, we indicate that we (the Memo model in this example) contains the foreign key to another model.
 
 ### Has Many
 

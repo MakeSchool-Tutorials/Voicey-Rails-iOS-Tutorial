@@ -13,19 +13,13 @@ In this section we are going to setup a new rails app, examine the rails app arc
 rails new voicey-api --api -T
 ```
 
-2. Then setup your ruby version with rbenv by installing ruby 2.5.0:
-
-```shell
-rbenv install 2.5.0
-```
-
-3. Change directory to your project
+2. Change directory to your project
 
 ```shell
 cd voicey-api
 ```
 
-4. Set the ruby version to 2.5.0
+3. Set the local ruby version to 2.5.0
 
 ```shell
 rbenv local 2.5.0
@@ -35,7 +29,9 @@ rbenv local 2.5.0
 
 > [info]
 > **Breaking down the rails new command**
+>
 > ![Rails Setup](assets/rails-init.png)
+>
 
 # Rails Application Structure
 
