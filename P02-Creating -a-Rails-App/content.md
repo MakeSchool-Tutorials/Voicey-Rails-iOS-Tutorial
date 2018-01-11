@@ -9,21 +9,23 @@ In this section we are going to setup a new rails app, examine the rails app arc
 
 1. Lets generate a new Rails project by running:
 
-```shell
-rails new voicey-api --api -T
-```
+    ```shell
+    rails new voicey-api --api -T
+    ```
+
 
 2. Change directory to your project
 
-```shell
-cd voicey-api
-```
+    ```shell
+    cd voicey-api
+    ```
+
 
 3. Set the local ruby version to 2.5.0
 
-```shell
-rbenv local 2.5.0
-```
+    ```shell
+    rbenv local 2.5.0
+    ```
 
 ----
 
