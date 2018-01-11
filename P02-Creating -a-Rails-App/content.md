@@ -99,9 +99,9 @@ The app folder contains the following folders:
 └── spring.rb
 ```
 
-The app folder contains the following:
+The config folder contains the following:
 
-- Environments - Setup for our enviroments (development, test, production, etc..)
+- Environments - Setup for our environments (development, test, production, etc..)
 - database.yml - This is where we will setup our databases
 - routes.rb - This is where we will add our Restful routes to.
 - application.rb - Contains setting for our rails application.
