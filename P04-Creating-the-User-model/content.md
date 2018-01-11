@@ -11,7 +11,7 @@ Rails uses a lot of command line tools to speed up the process of development. T
 
 ## Generators
 
-Generators enable us to create files quickly. Most of the time, generators will contain boilerplate code that we can use. We will use them to create _models, views and controllers_ in this tutorial.
+Generators enable us to create files quickly. Most of the time, generators will contain boilerplate code that we can use. We will use them to create _migrations, models, views and controllers_ in this tutorial.
 
 # Creating the User model
 
@@ -25,8 +25,10 @@ rails generate model User name:string email:string
 
 > [info]
 > ![Rails Generate](assets/rails-generate.png)
-> rails generate model tells rails we want to generate a model called User. The next parameters are the attributes of the model.
+>
+*rails generate model* tells rails we want to generate a model called User. The next parameters are the attributes of the model.
 eg. rails generate User name:string email:string age:integer
+>
 
 <!--  -->
 
