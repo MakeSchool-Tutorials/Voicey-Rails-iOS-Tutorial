@@ -116,13 +116,13 @@ The models, views and controllers are found in their folders under the app folde
 
 The _Model_ enables us to map a database table with a Ruby object. It can handle associations, validations, queries and more.
 
-The _Model_ maintains an active relationship with a library called _ActiveRecord_, which Rails uses to manage the relationship with the datbase.
+The _Model_ maintains an active relationship with a library called _ActiveRecord_, which Rails uses to manage the relationship with the database.
 
 ## The View
 
 The _View_ handles the formatting and presentation of data.
 
-In this tutorial, we are using Rails in API only mode, which means we will be rending _JSON_ instead of _HTML_ views.
+In this tutorial, we are using Rails in _API_ mode, which means we will be rending _JSON_ instead of _HTML_ views.
 
 ## The Controller
 
