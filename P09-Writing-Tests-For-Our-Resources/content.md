@@ -227,7 +227,7 @@ RSpec.describe Memo, type: :model do
     it "is valid with valid attributes" do
       memo = Memo.new(
         title: "My Memo",
-        time: DateTime.now.utc,
+        date: DateTime.now.utc,
         text_body: "This is the text body",
         user: subject
       )
@@ -236,7 +236,7 @@ RSpec.describe Memo, type: :model do
     it "is invalid without a title" do
       bad_memo = Memo.new(
         title: nil,
-        time: DateTime.now.utc,
+        date: DateTime.now.utc,
         text_body: "This is the text body",
         user: subject
       )
@@ -245,7 +245,7 @@ RSpec.describe Memo, type: :model do
     it "is invalid without an time" do
       bad_memo = Memo.new(
         title: "My Memo",
-        time: nil,
+        date: nil,
         text_body: "This is the text body",
         user: subject
       )
@@ -254,7 +254,7 @@ RSpec.describe Memo, type: :model do
     it "is invalid without an text body" do
       bad_memo = Memo.new(
         title: "My Memo",
-        time: DateTime.now.utc,
+        date: DateTime.now.utc,
         text_body: nil,
         user: subject
       )
@@ -263,7 +263,7 @@ RSpec.describe Memo, type: :model do
     it "is invalid without a user" do
       bad_memo = Memo.new(
         title: "My Memo",
-        time: DateTime.now.utc,
+        date: DateTime.now.utc,
         text_body: nil,
         user: nil
       )

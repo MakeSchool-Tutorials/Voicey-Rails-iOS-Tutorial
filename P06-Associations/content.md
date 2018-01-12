@@ -126,7 +126,7 @@ user.save
 ```ruby
 memo = Memo.create(
   title: "My Memo",
-  time: DateTime.now.utc,
+  date: DateTime.now.utc,
   text_body: "Memo text body",
   user: user
   )
