@@ -21,7 +21,7 @@ Lets start by creating the _User_ model since we will need a way to associate a 
 rails generate model User name:string email:string
 ```
 
-### Breakdown of Model Generator
+### Breakdown of the Model Generator
 
 > [info]
 > ![Rails Generate](assets/rails-generate.png)
@@ -74,6 +74,12 @@ For the _User_ migration file, we are creating a brand new table in our database
 > Running rails generate model will create both the model file and a migration file to accompany it.
 >
 
+Lets run our migrations with this command:
+
+```shell
+rails db:migrate
+```
+
 # The Schema file
 
 The _schema.rb_ file is located in db folder and describes the schema of your database. All your migration changes should reflect here in one file.
@@ -124,7 +130,7 @@ user.save
 
 ## Inspecting our User objects from the database
 
-We can query for objects in the rails console.
+We can query for objects in the _rails console_.
 
 Lets fetch all users in our database.
 
