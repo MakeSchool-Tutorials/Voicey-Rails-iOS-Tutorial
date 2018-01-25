@@ -117,7 +117,7 @@ class User < ApplicationRecord
 end
 ```
 
-Lets modify our _application.rb_ file to set a current user variable and require authentication to use our Rails app.
+Lets modify our _application_controller.rb_ file to set a current user variable and require authentication to use our Rails app.
 
 ```ruby
 # 1. Import HttpAuthentication library from ActionController
