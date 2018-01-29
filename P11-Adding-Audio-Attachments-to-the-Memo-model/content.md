@@ -7,7 +7,7 @@ Voicey allows users to add voice memos. So far, we have created and tested our U
 
 In this section, we are going to add an audio attachment to _Memos_ to enable us to have voice memos.
 
-# Setting up an Amazon s3 account
+# Setting up an Amazon S3 account
 
 Before we can upload voice memos, we will need a place to store our audio files. We cannot store the files on the computer that houses our Rails application because is not designed to store lots of large files. Typically, developers will store large files in a content delivery network like Amazon s3 or Google cloud storage then store the url to the resource in a database.
 
@@ -176,7 +176,7 @@ Then add the following code to your _Memo_ model.
 
 ```ruby
 has_attached_file :voice_file
-validates_attachment :voice_file, :content_type =>['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio']
+validates_attachment :voice_file, content_type: { content_type: ['audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio']}
 ```
 
 Your _Memo_ model should now contain the following:
