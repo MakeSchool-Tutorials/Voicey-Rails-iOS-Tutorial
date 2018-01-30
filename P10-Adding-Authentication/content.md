@@ -10,7 +10,7 @@ We worked on fleshing out the details of a _User_ in the previous section. Lets 
 We are going to handle authentication in our Rails app with tokens. We are going to be adding some new fields to the _users_ table in our database.
 
 ```ruby
-rails generate migration AddPasswordAndTokenToUsers token:string:index password_hash:string, password_salt:string
+rails generate migration AddPasswordAndTokenToUsers token:string:index password_hash:string password_salt:string
 ```
 
 This will add a token, password_hash and password_salt field to the _User_ model and add the token field as an unique index - no two _users_ will have the same token.
