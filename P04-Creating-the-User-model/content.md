@@ -143,7 +143,7 @@ users = User.all
 > We can print the first user in the array by running:
 
 > 1. first_user = users.first
-> 1. puts first_user.name
+> 1. p first_user.name
 >
 
 ---
@@ -158,6 +158,7 @@ Lets modify it to make the email field unique, that way we cannot insert a _User
 
 ## Adding a unique field to User
 
+Exit your Rails Console, or open a new terminal.
 Run this in your terminal:
 
 ```ruby
